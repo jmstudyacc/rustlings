@@ -4,18 +4,16 @@
 // This store is having a sale where if the price is an even number, you get
 // 10 Rustbucks off, but if it's an odd number, it's 3 Rustbucks off.
 
-// I AM NOT DONE
-
 fn main() {
     let original_price = 51;
     println!("Your sale price is {}", sale_price(original_price));
 }
 
-fn sale_price(price: i32) -> {
+fn sale_price(mut price: i32) -> i32 {
     if is_even(price) {
-        price - 10
+        &price - 10              // need to investigate how to remove this error - pointers?
     } else {
-        price - 3
+        &price - 3               // Pointer to a mutable variable named price that is an i32
     }
 }
 
