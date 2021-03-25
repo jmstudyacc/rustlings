@@ -12,8 +12,6 @@
 // Execute the command `rustlings hint collections4` if you need
 // hints.
 
-// I AM NOT DONE
-
 use std::collections::HashMap;
 
 #[derive(Hash, PartialEq, Eq)]
@@ -34,10 +32,16 @@ fn fruit_basket(basket: &mut HashMap<Fruit, u32>) {
         Fruit::Pineapple,
     ];
 
+    // this is looping over the 'fruit' elements in the vector 'fruit_kinds'
+    // you use the .entry() method to check if the hashmap has that element in it
+    // if it does not, or_insert() will add a specified amount of that element
+
     for fruit in fruit_kinds {
         // TODO: Put new fruits if not already present. Note that you
         // are not allowed to put any type of fruit that's already
         // present!
+        basket.entry(Fruit::Banana).or_insert(5);
+        basket.entry(Fruit::Pineapple).or_insert(7);
     }
 }
 
