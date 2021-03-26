@@ -17,19 +17,21 @@
 //
 // Execute `rustlings hint errorsn` for hints :)
 
-// I AM NOT DONE
-
 use std::error;
 use std::fmt;
 use std::io;
 
 // PositiveNonzeroInteger is a struct defined below the tests.
-fn read_and_validate(b: &mut dyn io::BufRead) -> Result<PositiveNonzeroInteger, ???> {
+// Box<dyn error::Error>... is called as the other Result here as it captures a group of errors - like a specific non-specific Result
+fn read_and_validate(b: &mut dyn io::BufRead) -> Result<PositiveNonzeroInteger, Box<dyn error::Error>> {
     let mut line = String::new();
-    b.read_line(&mut line);
-    let num: i64 = line.trim().parse();
-    let answer = PositiveNonzeroInteger::new(num);
-    answer
+    // we use the ? here as the result of this could be an error
+    b.read_line(&mut line)?;
+    // this variable could error during the .trim() and/or .parse()
+    let num: i64 = line.trim().parse()?;
+    // this is also susceptible to errors due to what occurs when the new() instance is called with num variable
+    let answer = PositiveNonzeroInteger::new(num)?;
+    Ok(answer)
 }
 
 //
